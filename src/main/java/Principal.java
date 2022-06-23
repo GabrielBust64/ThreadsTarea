@@ -8,19 +8,26 @@ import java.util.ArrayList;
 
 public class Principal {
     public static ArrayList<Integer> colores = new ArrayList<>();
+    private static boolean stay = true;
     public static void main(String[] args) throws IOException {
         for (int i = 0; i <= 5; i++) {
             Threadds thread = new Threadds(colores,i);
             thread.start();
         }
 
-        crearImagen(colores);
+        while(stay){
+            if(colores.size()==400){
+                crearImagen(colores);
+                stay = false;
+            }
+        }
     }
 
     private static void crearImagen(ArrayList<Integer> colores) throws IOException {
         int[][] colores2d = new int[20][20];
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
+                // System.out.println("[" + i + "] " + "[" + j + "]");
                 colores2d[i][j]= colores.get((j*10)+i);
             }
         }
